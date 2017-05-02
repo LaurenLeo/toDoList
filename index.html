@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="ourModule" ng-controller="ourController" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Baloo|Raleway" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style/style.css">
+  <title>Angular FUN</title>
+</head>
+  <body>
+<h1>To Do List</h1>
+  <div class="wrapper">
+    <div class="box 1">
+
+
+
+<!--ENTER TASKS and due date here with button-->
+
+    <input id="inputName" type="text" placeholder="Things to do.." ng-model="task.name">
+
+    <input id="inputDue" type="text" placeholder="finish by.." ng-model="task.due"><br>
+    <button id="addBtn" type="button" ng-click="addTask(task)">&#10010;</button>
+</div>
+<div class="box 2">
+
+  <!--FILTER SECTION-->
+      <input class="searchBox" type="text" placeholder="Start typing to search" ng-model="searchToDo"><br>
+        <div ng-repeat="task in toDoList | filter: searchToDo">
+            <p ng-show="searchToDo"> {{ task.name }} {{ task.due }}</p>
+        </div>
+
+<!--TO DO LIST that displays after adding-->
+    <div ng-repeat="task in toDoList | orderBy: 'name'">
+      <p>
+        {{ task.name }} {{ task.due }}
+        <button class="delete" ng-show="task.name" ng-click="remove(task)">delete</button>
+        <button class="done" ng-show="task.name" ng-click="add(task)">Completed</button>
+
+      </p>
+      </div>
+</div>
+
+<div id="completeList" class="box 3">
+<!--COMPLETED SECTION-->
+    <div>
+      <ul ng-repeat="task in checked">
+        <li><del>{{task.name}} {{task.due}}</del></li>
+      </ul>
+    </div>
+</div>
+
+
+
+
+
+</div>
+    <script src="angular.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
